@@ -4,6 +4,7 @@ using ComputerStockApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComputerStockApi.Migrations
 {
     [DbContext(typeof(ComputerStockContext))]
-    partial class ComputerStockContextModelSnapshot : ModelSnapshot
+    [Migration("20230109135527_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace ComputerStockApi.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("Computers", (string)null);
+                    b.ToTable("Computers");
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.BorrowComputerDao", b =>
@@ -87,7 +90,7 @@ namespace ComputerStockApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BorrowComputer", (string)null);
+                    b.ToTable("BorrowComputer");
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.ComputerTypeDao", b =>
@@ -104,7 +107,7 @@ namespace ComputerStockApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ComputerType", (string)null);
+                    b.ToTable("ComputerType");
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.ProcessorDao", b =>
@@ -129,7 +132,7 @@ namespace ComputerStockApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Processor", (string)null);
+                    b.ToTable("Processor");
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.StateDao", b =>
@@ -146,7 +149,7 @@ namespace ComputerStockApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("State", (string)null);
+                    b.ToTable("State");
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.UserDao", b =>
@@ -163,7 +166,7 @@ namespace ComputerStockApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ComputerStockApi.Daos.ComputerDao", b =>

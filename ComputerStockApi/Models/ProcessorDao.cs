@@ -7,7 +7,7 @@ namespace ComputerStockApi.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public string niveau { get; set; }
-        public string vitesse { get; set; }
+        public string Niveau { get; set; }
+        public string Vitesse { get; set; }
     }
 }

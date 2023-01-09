@@ -1,5 +1,8 @@
 using ComputerStockApi.Data;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using System.Reflection;
+using Autofac;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors(options =>
+        options
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+    );
     app.UseSwagger();
     app.UseSwaggerUI();
 }
