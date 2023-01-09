@@ -6,6 +6,7 @@ namespace ComputerStockApi.Data
 {
     public class ComputerStockContext : DbContext
     {
+        public ComputerStockContext() { }
         public ComputerStockContext(DbContextOptions<ComputerStockContext> options):base(options) { }
         public DbSet<ComputerDao> Computers { get; set; }
         public DbSet<BorrowComputerDao> BorrowComputer { get; set; }

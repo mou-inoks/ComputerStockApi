@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MediatR;
 using System.Reflection;
 using Autofac;
+using ComputerStockApi.Quer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
 
 builder.Services.AddDbContext<ComputerStockContext>(opt => opt.UseSqlServer(connectionString));
+
+builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

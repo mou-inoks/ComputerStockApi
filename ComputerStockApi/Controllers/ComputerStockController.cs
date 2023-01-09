@@ -4,6 +4,8 @@ using ComputerStockApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ComputerStockApi.Dtos;
+using ComputerStockApi.Quer;
 
 namespace ComputerStockApi.Controllers
 {
@@ -12,16 +14,20 @@ namespace ComputerStockApi.Controllers
     public class ComputerStockController : ControllerBase
     {
         private readonly ComputerStockContext _context;
+        private readonly IMediator mediator;
 
-        public ComputerStockController(ComputerStockContext context)
+        public ComputerStockController(ComputerStockContext context, IMediator mediator )
         {
             _context = context;
+            this.mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ComputerDao>>> GetComputers()
+        public async Task<ActionResult<IEnumerable<ComputerDto>>> GetComputers()
         {
-            var response = await _context.Computers.ToListAsync();
+            var request = new GetAllComputersQuery();
+
+            var response = await mediator.Send(request);
 
             return Ok(response);
         }
