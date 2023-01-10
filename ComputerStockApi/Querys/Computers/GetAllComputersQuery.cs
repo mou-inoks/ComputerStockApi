@@ -4,10 +4,10 @@ using ComputerStockApi.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComputerStockApi.Quer
+namespace ComputerStockApi.Query
 {
     public class GetAllComputersQuery : IRequest<IEnumerable<ComputerDto>>
-    {
+    { 
     }
 
     public class GetAllComputersQueryHandler : IRequestHandler<GetAllComputersQuery, IEnumerable<ComputerDto>>
@@ -15,9 +15,9 @@ namespace ComputerStockApi.Quer
         private readonly IMapper mapper;
         private readonly ComputerStockContext _context; 
 
-        public GetAllComputersQueryHandler(IMapper mapper)
+        public GetAllComputersQueryHandler(IMapper mapper, IConfiguration conf)
         {
-            _context = new ComputerStockContext();
+            _context = new ComputerStockContext(conf);
             this.mapper = mapper;
         }
 
