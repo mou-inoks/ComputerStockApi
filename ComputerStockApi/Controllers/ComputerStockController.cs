@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ComputerStockApi.Dtos;
-using ComputerStockApi.Quer;
+using ComputerStockApi.Query;
 
 namespace ComputerStockApi.Controllers
 {
