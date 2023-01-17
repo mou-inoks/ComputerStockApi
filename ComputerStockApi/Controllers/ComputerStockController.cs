@@ -10,6 +10,7 @@ using AutoMapper;
 using ComputerStockApi.Commands.Computers;
 using ComputerStockApi.Querys;
 using ComputerStockApi.Querys.Processor;
+using ComputerStockApi.Querys.Computers;
 
 namespace ComputerStockApi.Controllers
 {
@@ -38,6 +39,19 @@ namespace ComputerStockApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<ComputerDto>> GetComputerById(int id )
+        {
+            var request = new GetComputerByIdQuery()
+            {
+                Id = id
+            };
+            var response = mediator.Send(request);
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddComputer([FromBody]ComputerDto computer)
         {
@@ -48,7 +62,7 @@ namespace ComputerStockApi.Controllers
             return Ok(response);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteComputer(int id)
+        public async Task<ActionResult<IEnumerable<ComputerDto>>> DeleteComputer(int id)
         {
             var command = new DeleteComputerCommand()
             {

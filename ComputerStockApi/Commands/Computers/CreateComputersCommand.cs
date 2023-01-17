@@ -12,7 +12,7 @@ namespace ComputerStockApi.Commands.Computers
     }
     public class CreateComputersCommandHandler : IRequestHandler<CreateComputersCommand>
     {
-        private readonly IMapper mapper;
+        private readonly IMapper mapper; 
         private readonly ComputerStockContext _context;
 
         public CreateComputersCommandHandler(IMapper map, IConfiguration config)
