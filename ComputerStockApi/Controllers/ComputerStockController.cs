@@ -50,18 +50,14 @@ namespace ComputerStockApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComputer(int id)
         {
-            var computer =  _context.Computers.FirstOrDefault(x => x.Id == id);
-
-            if (computer == null)
-                return NotFound();
-            else
+            var command = new DeleteComputerCommand()
             {
-                _context.Computers.Remove(computer);
-                await _context.SaveChangesAsync();
+                Id = id
+            };
 
-            }
+            var response = await mediator.Send(command);    
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpGet("processors")]
@@ -82,7 +78,7 @@ namespace ComputerStockApi.Controllers
                 Id = id
             };
             
-            var result = await mediator.Send(query);    
+            var result = await mediator.Send(query);
 
             return Ok(result);
         }

@@ -7,8 +7,9 @@ using ComputerStockApi.Daos;
 
 namespace ComputerStockApi.Commands.Computers
 {
-    public class DeleteComputerCommand : ComputerDto, IRequest
+    public class DeleteComputerCommand : IRequest
     {
+        public int Id { get; set; }
     }
     public class DeleteComputerCommandHandler : IRequestHandler<DeleteComputerCommand>
     {
@@ -23,11 +24,16 @@ namespace ComputerStockApi.Commands.Computers
 
         public async Task<Unit> Handle(DeleteComputerCommand request, CancellationToken cancellationToken)
         {
-            var t = await _context.Computers.FindAsync(request.Id);
+            var computer = _context.Computers.FirstOrDefault(x => x.Id == request.Id);
 
-            _context.Computers.Remove(t);
+            if (computer == null)
+                throw new Exception();
+            else
+            {
+                _context.Computers.Remove(computer);
+                await _context.SaveChangesAsync();
 
-            await _context.SaveChangesAsync();
+            }
 
             return Unit.Value;
         }
