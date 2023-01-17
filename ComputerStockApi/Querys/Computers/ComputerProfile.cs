@@ -16,6 +16,7 @@ namespace ComputerStockApi.Query
             CreateMap<StateDao, StateDto>();
             CreateMap<CreateComputersCommand, ComputerDao>();
             CreateMap<CreateComputersCommand, ComputerDto>();
+            CreateMap<ComputerDto, CreateComputersCommand>();
 
         }
     }

@@ -37,7 +37,7 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddComputer([FromBody]CreateComputersCommand computer)
+        public async Task<IActionResult> AddComputer([FromBody]ComputerDto computer)
         {
             var command = mapper.Map<CreateComputersCommand>(computer);
 

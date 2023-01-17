@@ -7,15 +7,8 @@ using ComputerStockApi.Daos;
 
 namespace ComputerStockApi.Commands.Computers
 {
-    public class CreateComputersCommand : IRequest
+    public class CreateComputersCommand : ComputerDto,IRequest
     {
-        public string Name { get; set; }
-        public int TypeId{ get; set; }
-        public string Brand { get; set; }
-        public int ProcessorId { get; set; }
-        public int Ram { get; set; }
-        public int StateId { get; set; }
-        public string Comment { get; set; }
     }
     public class CreateComputersCommandHandler : IRequestHandler<CreateComputersCommand>
     {
@@ -30,9 +23,18 @@ namespace ComputerStockApi.Commands.Computers
 
         public async Task<Unit> Handle(CreateComputersCommand command, CancellationToken cancellationToken)
         {
-            var computerDao = mapper.Map<ComputerDao>(command);
+            var dao = new ComputerDao()
+            {
+                Name = command.Name,
+                StateId = command.State.Id,
+                ProcessorId = command.Processor.Id,
+                TypeId = command.Type.Id,
+                Brand = command.Brand,
+                Comment = command.Comment,
+                Ram = command.Ram,
+            };
 
-            await _context.Computers.AddAsync(computerDao);
+            await _context.Computers.AddAsync(dao);
 
             await _context.SaveChangesAsync();
 
