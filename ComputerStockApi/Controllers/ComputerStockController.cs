@@ -52,7 +52,7 @@ namespace ComputerStockApi.Controllers
             {
                 Id = id
             };
-            var response = mediator.Send(request);
+            var response = await mediator.Send(request);
 
             return Ok(response);
         }
@@ -108,7 +108,7 @@ namespace ComputerStockApi.Controllers
         {
             var command = mapper.Map<CreateProcessorCommand>(processor);
 
-            var response = mediator.Send(command);
+            var response = await mediator.Send(command);
 
             return Ok(response);
         }
@@ -136,7 +136,7 @@ namespace ComputerStockApi.Controllers
 
             return Ok(response);
         }
-
+      
         [HttpGet("state/{id}")]
         public async Task<ActionResult<IEnumerable<StateDto>>> GetStateById(int id)
         {
@@ -155,7 +155,7 @@ namespace ComputerStockApi.Controllers
         {
             var command = mapper.Map<CreateStateCommand>(state);
 
-            var response = mediator.Send(command);
+            var response = await mediator.Send(command);
 
             return Ok(response);
         }
@@ -178,7 +178,7 @@ namespace ComputerStockApi.Controllers
         {
             var request = new GetAllTypesQuery();
 
-            var response = mediator.Send(request);
+            var response = await mediator.Send(request);
 
             return Ok(response);
         }
