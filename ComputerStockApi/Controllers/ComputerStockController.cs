@@ -11,6 +11,8 @@ using ComputerStockApi.Commands.Computers;
 using ComputerStockApi.Querys;
 using ComputerStockApi.Querys.Processor;
 using ComputerStockApi.Querys.Computers;
+using ComputerStockApi.Commands.Processor;
+using ComputerStockApi.Querys.State;
 
 namespace ComputerStockApi.Controllers
 {
@@ -99,45 +101,37 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpPost("processors")]
-        public async Task<IActionResult> AddProcessor(ProcessorDao processor)
+        public async Task<ActionResult<IEnumerable<ProcessorDto>>> AddProcessor()
         {
-            var NProcessor = new ProcessorDao()
-            {
-                Name=processor.Name,
-                Vitesse=processor.Vitesse,
-                Niveau=processor.Niveau,
-            };
+            var command = new CreateProcessorCommand();
 
-            await _context.Processor.AddAsync(NProcessor);
-            await _context.SaveChangesAsync();
+            var response = mediator.Send(command);
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpDelete("processor/{id}")]
         public async Task<IActionResult> DeleteProcessor(int id)
         {
-            var processor = _context.Processor.FirstOrDefault(x => x.Id == id);
-
-            if (processor == null)
-                return NotFound();
-            else
+            var command = new DeleteProcessorCommand()
             {
-                _context.Processor.Remove(processor);
-                await _context.SaveChangesAsync();
+                Id = id
+            };
 
-            }
+            var response = await mediator.Send(command);
 
-            return Ok();
+            return Ok(response);
+
         }
 
-
         [HttpGet("state")]
-        public IEnumerable<StateDao> GetStates()
+        public async Task<ActionResult<IEnumerable<StateDto>>> GetStates()
         {
-            var request = _context.Set<StateDao>().ToList();
+            var query = new GetAllStateQuery();
 
-            return request;
+            var response = await mediator.Send(query);
+
+            return Ok(response);
         }
 
         [HttpPost("state")]
