@@ -101,9 +101,9 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpPost("processors")]
-        public async Task<ActionResult<IEnumerable<ProcessorDto>>> AddProcessor()
+        public async Task<ActionResult<IEnumerable<ProcessorDto>>> AddProcessor([FromBody] ProcessorDto processor)
         {
-            var command = new CreateProcessorCommand();
+            var command = mapper.Map<CreateProcessorCommand>(processor);
 
             var response = mediator.Send(command);
 

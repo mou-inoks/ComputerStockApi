@@ -25,9 +25,14 @@ namespace ComputerStockApi.Querys.Processor
         {
             var dao =  _context.Processor.Where(pro => pro.Id == request.Id).AsNoTracking().SingleOrDefault();
 
-            var dto = mapper.Map<ProcessorDto>(dao);
+            if (dao == null)
+                throw new Exception();
+            else
+            {
+                var dto = mapper.Map<ProcessorDto>(dao);
 
-            return dto;
+                return dto;
+            }
         }
     }
 }
