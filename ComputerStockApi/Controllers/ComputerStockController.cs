@@ -15,6 +15,7 @@ using ComputerStockApi.Commands.Processor;
 using ComputerStockApi.Querys.State;
 using ComputerStockApi.Commands.State;
 using ComputerStockApi.Querys.Type;
+using ComputerStockApi.Commands.Type;
 
 namespace ComputerStockApi.Controllers
 {
@@ -139,7 +140,10 @@ namespace ComputerStockApi.Controllers
         [HttpGet("state/{id}")]
         public async Task<ActionResult<IEnumerable<StateDto>>> GetStateById(int id)
         {
-            var query = mapper.Map<GetStateByIdQuery>(id);
+            var query = new GetStateByIdQuery()
+            {
+                Id = id
+            };
 
             var response = await mediator.Send(query);
 
@@ -147,17 +151,13 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpPost("state")]
-        public async Task<IActionResult> AddState(StateDao state)
+        public async Task<IActionResult> AddState([FromBody] StateDto state)
         {
-            var NState = new StateDao()
-            {
-                 State= state.State
-            };
+            var command = mapper.Map<CreateStateCommand>(state);
 
-            await _context.State.AddAsync(NState);
-            await _context.SaveChangesAsync();
+            var response = mediator.Send(command);
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpDelete("state/{id}")]
@@ -184,17 +184,25 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpPost("type")]
-        public async Task<IActionResult> addType(ComputerTypeDao type)
+        public async Task<IActionResult> AddType([FromBody] ComputerTypeDto typeDto)
         {
-            var NType = new ComputerTypeDao()
+            var command = mapper.Map<CreateStateCommand>(typeDto);
+
+            var response = mediator.Send(command);
+
+            return Ok(response);
+        }
+        [HttpDelete("type/{id}")]
+        public async Task<IActionResult> DeleteType(int id)
+        {
+            var command = new DeleteStateCommand()
             {
-                Type = type.Type
+                Id = id
             };
 
-            await _context.ComputerType.AddAsync(NType);
-            await _context.SaveChangesAsync();
+            var response = await mediator.Send(command);
 
-            return Ok();
+            return Ok(response);
         }
     }
 }
