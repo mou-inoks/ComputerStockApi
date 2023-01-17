@@ -8,6 +8,8 @@ using ComputerStockApi.Dtos;
 using ComputerStockApi.Query;
 using AutoMapper;
 using ComputerStockApi.Commands.Computers;
+using ComputerStockApi.Querys;
+using ComputerStockApi.Querys.Processor;
 
 namespace ComputerStockApi.Controllers
 {
@@ -63,19 +65,26 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpGet("processors")]
-        public IEnumerable<ProcessorDao> GetProcessors()
+        public async Task<ActionResult<IEnumerable<ProcessorDto>>> GetProcessors()
         {
-            var request = _context.Set<ProcessorDao>().ToList();
+            var query = new GetAllProcessorsQuery();
 
-            return request;
+            var response = await mediator.Send(query);
+
+            return Ok(response);
         }
 
         [HttpGet("processors/{id}")]
         public async Task<IActionResult> GetProcessorsById(int id)
         {
-            var processor = _context.Processor.FirstOrDefault(x => x.Id == id);
+            var query = new GetProcessorByIdQuery()
+            {
+                Id = id
+            };
+            
+            var result = await mediator.Send(query);    
 
-            return Ok(processor);
+            return Ok(result);
         }
 
         [HttpPost("processors")]
