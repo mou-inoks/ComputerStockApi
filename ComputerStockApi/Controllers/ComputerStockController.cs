@@ -134,6 +134,16 @@ namespace ComputerStockApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet("state/{id}")]
+        public async Task<ActionResult<IEnumerable<StateDto>>> GetStateById(int id)
+        {
+            var query = mapper.Map<GetStateByIdQuery>(id);
+
+            var response = await mediator.Send(query);
+
+            return Ok(response);
+        }
+
         [HttpPost("state")]
         public async Task<IActionResult> AddState(StateDao state)
         {
