@@ -23,7 +23,11 @@ namespace ComputerStockApi.Query
 
         public async Task<IEnumerable<ComputerDto>> Handle(GetAllComputersQuery request, CancellationToken cancellationToken)
         {
-            var daos = await _context.Computers.ToListAsync();
+            var daos = await _context.Computers
+                .Include(c => c.Processor)
+                .Include(c => c.State)
+                .Include(c => c.Type)
+                .ToListAsync();
 
             var dto = mapper.Map<IEnumerable<ComputerDto>>(daos);
 

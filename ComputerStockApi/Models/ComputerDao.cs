@@ -24,5 +24,6 @@ namespace ComputerStockApi.Daos
         public int StateId { get; set; }
         public StateDao State { get; set; }
         public string Comment { get; set; }
+
     }
 }

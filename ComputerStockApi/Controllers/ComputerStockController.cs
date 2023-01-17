@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Query;
+using AutoMapper;
+using ComputerStockApi.Commands.Computers;
 
 namespace ComputerStockApi.Controllers
 {
@@ -15,11 +17,13 @@ namespace ComputerStockApi.Controllers
     {
         private readonly ComputerStockContext _context;
         private readonly IMediator mediator;
+        private readonly IMapper mapper;
 
-        public ComputerStockController(ComputerStockContext context, IMediator mediator )
+        public ComputerStockController(ComputerStockContext context, IMediator mediator, IMapper map )
         {
             _context = context;
             this.mediator = mediator;
+            mapper = map;
         }
 
         [HttpGet]
@@ -33,24 +37,13 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddComputer(ComputerDao computer)
+        public async Task<IActionResult> AddComputer([FromBody]CreateComputersCommand computer)
         {
-            var Ncomputer = new ComputerDao()
-            {
-                Id = computer.Id,
-                Name = computer.Name,
-                Brand = computer.Brand,
-                StateId = computer.StateId,
-                Comment = computer.Comment,
-                ProcessorId = computer.ProcessorId,
-                Ram = computer.Ram,
-                TypeId = computer.TypeId,
-            };
+            var command = mapper.Map<CreateComputersCommand>(computer);
 
-            await _context.Computers.AddAsync(Ncomputer);
-            await _context.SaveChangesAsync();
+            var response = await mediator.Send(command);
 
-            return Ok();
+            return Ok(response);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComputer(int id)
