@@ -14,6 +14,7 @@ using ComputerStockApi.Querys.Computers;
 using ComputerStockApi.Commands.Processor;
 using ComputerStockApi.Querys.State;
 using ComputerStockApi.Commands.State;
+using ComputerStockApi.Querys.Type;
 
 namespace ComputerStockApi.Controllers
 {
@@ -173,11 +174,13 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpGet("type")]
-        public IEnumerable<ComputerTypeDao> GetType()
+        public async Task<ActionResult<IEnumerable<ComputerTypeDto>>> GetType()
         {
-            var request = _context.Set<ComputerTypeDao>().ToList();
+            var request = new GetAllTypesQuery();
 
-            return request;
+            var response = mediator.Send(request);
+
+            return Ok(response);
         }
 
         [HttpPost("type")]
