@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ComputerStockApi.Data;
+﻿using ComputerStockApi.Data;
 using MediatR;
 
 namespace ComputerStockApi.Commands.Processor
@@ -10,13 +9,11 @@ namespace ComputerStockApi.Commands.Processor
     }
     public class DeleteProcessorCommandHandler : IRequestHandler<DeleteProcessorCommand>
     {
-        private readonly IMapper mapper;
         private readonly ComputerStockContext _context;
 
-        public DeleteProcessorCommandHandler(IMapper map, IConfiguration config)
+        public DeleteProcessorCommandHandler( IConfiguration config)
         {
             _context = new ComputerStockContext(config);
-            mapper = map;
         }
 
         public async Task<Unit> Handle(DeleteProcessorCommand request, CancellationToken cancellationToken)

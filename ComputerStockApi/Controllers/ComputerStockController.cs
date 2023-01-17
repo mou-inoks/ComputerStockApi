@@ -13,6 +13,7 @@ using ComputerStockApi.Querys.Processor;
 using ComputerStockApi.Querys.Computers;
 using ComputerStockApi.Commands.Processor;
 using ComputerStockApi.Querys.State;
+using ComputerStockApi.Commands.State;
 
 namespace ComputerStockApi.Controllers
 {
@@ -156,6 +157,19 @@ namespace ComputerStockApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpDelete("state/{id}")]
+        public async Task<IActionResult> DeleteState(int id)
+        {
+            var command = new DeleteStateCommand()
+            {
+                Id = id
+            };
+
+            var response = await mediator.Send(command);
+
+            return Ok(response);
         }
 
         [HttpGet("type")]
