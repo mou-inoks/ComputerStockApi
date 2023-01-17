@@ -61,6 +61,7 @@ namespace ComputerStockApi.Controllers
 
             return Ok(response);
         }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<IEnumerable<ComputerDto>>> DeleteComputer(int id)
         {
