@@ -20,7 +20,7 @@ namespace ComputerStockApi.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString"),
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("MacOsConnection"),
                     o =>
                     {
                         o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery).UseRelationalNulls();
