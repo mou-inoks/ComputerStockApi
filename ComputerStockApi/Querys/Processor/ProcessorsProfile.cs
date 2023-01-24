@@ -14,8 +14,13 @@ namespace ComputerStockApi.Querys.Processor
         {
             CreateMap<ProcessorDao, ProcessorDto>();
             CreateMap<ProcessorDto, ProcessorDao>();
+            
             CreateMap<CreateProcessorCommand, ProcessorDto>();
             CreateMap<ProcessorDto, CreateProcessorCommand>();
+            
+            CreateMap<UpdateProcessorCommand, ProcessorDto>();
+            CreateMap<ProcessorDto, UpdateProcessorCommand>();
+            
         }
 
     }

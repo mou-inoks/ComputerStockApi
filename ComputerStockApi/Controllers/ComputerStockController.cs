@@ -1,9 +1,6 @@
-﻿using ComputerStockApi.Daos;
-using ComputerStockApi.Data;
-using ComputerStockApi.Models;
+﻿using ComputerStockApi.Data;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Query;
 using AutoMapper;
@@ -15,7 +12,6 @@ using ComputerStockApi.Commands.Processor;
 using ComputerStockApi.Querys.State;
 using ComputerStockApi.Commands.State;
 using ComputerStockApi.Querys.Type;
-using ComputerStockApi.Commands.Type;
 
 namespace ComputerStockApi.Controllers
 {
@@ -42,6 +38,16 @@ namespace ComputerStockApi.Controllers
             var response = await mediator.Send(request);
 
             return Ok(response);
+        }
+
+        [HttpPost("update")]
+        public async Task<ActionResult<ComputerDto>> UpdateComputer([FromBody] ComputerDto computer)
+        {
+            var command = mapper.Map<UpdateComputerCommand>(computer);
+
+            var response = await mediator.Send(command);
+
+            return Ok(response); 
         }
 
         [HttpGet("{id}")]
@@ -112,6 +118,17 @@ namespace ComputerStockApi.Controllers
 
             return Ok(response);
         }
+        
+        [HttpPost("processors/update")]
+        public async Task<ActionResult<IEnumerable<ProcessorDto>>> UpdateProcessor([FromBody] ProcessorDto processor)
+        {
+            var command = mapper.Map<UpdateProcessorCommand>(processor);
+
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
+        
 
         [HttpDelete("processor/{id}")]
         public async Task<IActionResult> DeleteProcessor(int id)
