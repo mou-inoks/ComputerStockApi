@@ -12,6 +12,8 @@ using ComputerStockApi.Commands.Processor;
 using ComputerStockApi.Querys.State;
 using ComputerStockApi.Commands.State;
 using ComputerStockApi.Querys.Type;
+using MediatRApi.Commands.User;
+using MediatRApi.Querys.User;
 
 namespace ComputerStockApi.Controllers
 {
@@ -224,5 +226,64 @@ namespace ComputerStockApi.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("user")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
+        {
+            var request = new GetAllUsersQuery();
+
+            var response = await mediator.Send(request);
+
+            return Ok(response);
+        }
+
+        [HttpPost("user/update")]
+        public async Task<ActionResult<UserDto>> UpdateUsers([FromBody] UserDto user)
+        {
+            var command = mapper.Map<UpdateUserCommand>(user);
+
+            var response = await mediator.Send(command);
+
+            return Ok(response); 
+        }
+
+        [HttpGet("user/{id}")]
+
+        public async Task<ActionResult<UserDto>> GetUserById(int id )
+        {
+            var request = new GetUserByIdQuery()
+            {
+                Id = id
+            };
+            var response = await mediator.Send(request);
+
+            return Ok(response);
+        }
+
+        [HttpPost("user")]
+        public async Task<IActionResult> AddUser([FromBody]UserDto user)
+        {
+            var command = mapper.Map<CreateUserCommand>(user);
+
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
+        
+          
+        [HttpDelete("user/{id}")]
+        public async Task<ActionResult<IEnumerable<ComputerDto>>> DeleteUser(int id)
+        {
+            var command = new DeleteUserCommand()
+            {
+                Id = id
+            };
+
+            var response = await mediator.Send(command);    
+
+            return Ok(response);
+        }
+        
+        
     }
 }
