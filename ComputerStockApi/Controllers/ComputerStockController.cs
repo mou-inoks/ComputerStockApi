@@ -73,18 +73,7 @@ namespace ComputerStockApi.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<IEnumerable<ComputerDto>>> DeleteComputer(int id)
-        {
-            var command = new DeleteComputerCommand()
-            {
-                Id = id
-            };
-
-            var response = await mediator.Send(command);    
-
-            return Ok(response);
-        }
+        
 
         [HttpGet("processors")]
         public async Task<ActionResult<IEnumerable<ProcessorDto>>> GetProcessors()
@@ -129,7 +118,7 @@ namespace ComputerStockApi.Controllers
             return Ok(response);
         }
         
-
+        
         [HttpDelete("processor/{id}")]
         public async Task<IActionResult> DeleteProcessor(int id)
         {
@@ -178,7 +167,7 @@ namespace ComputerStockApi.Controllers
         }
 
         [HttpDelete("state/{id}")]
-        public async Task<IActionResult> DeleteState(int id)
+        public async Task<ActionResult<IEnumerable<StateDto>>> DeleteState(int id)
         {
             var command = new DeleteStateCommand()
             {
@@ -186,6 +175,19 @@ namespace ComputerStockApi.Controllers
             };
 
             var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
+        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<IEnumerable<ComputerDto>>> DeleteComputer(int id)
+        {
+            var command = new DeleteComputerCommand()
+            {
+                Id = id
+            };
+
+            var response = await mediator.Send(command);    
 
             return Ok(response);
         }
