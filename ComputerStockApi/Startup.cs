@@ -41,6 +41,7 @@ namespace MediatRApi
                .Where(t => t.IsClosedTypeOf(typeof(IRequestHandler<>)))
                .AsImplementedInterfaces();
 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

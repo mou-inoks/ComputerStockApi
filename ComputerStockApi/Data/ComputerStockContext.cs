@@ -28,6 +28,15 @@ namespace ComputerStockApi.Data
                     }
                 )
                 .EnableSensitiveDataLogging();
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ComputerTypeDao>().HasData(
+                new ComputerTypeDao() { Id = 1, Type = "Laptop"},
+                new ComputerTypeDao() { Id = 2, Type = "Mini-Computer"},
+                new ComputerTypeDao() { Id = 1, Type = "Fix" }
+                );
         }
 
     }
