@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ComputerStockApi.Daos;
 
 namespace ComputerStockApi.Models
 {
@@ -11,9 +12,14 @@ namespace ComputerStockApi.Models
         public DateTime ToDate { get; set; }
 
         [ForeignKey("FK_BorrowComputer_Computer_Id")]
-        public int ComputerId { get; set; }
+        public int ComputersId { get; set; }
+        public ComputerDao Computers { get; set; }
 
         [ForeignKey("FK_BorrowComputer_User_UserId")]
-        public int UserId { get; set; }
+
+        public int UsersId { get; set; }
+
+        public UserDao Users { get; set; }
+
     }
 }

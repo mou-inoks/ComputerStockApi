@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
-        public int ComputerId { get; set; }
-        public int UserId { get; set; }
+        public ComputerDto Computers { get; set; }
+        public UserDto Users { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using MediatR;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Query;
 using AutoMapper;
+using ComputerStockApi.Commands.Borrow;
 using ComputerStockApi.Commands.Computers;
 using ComputerStockApi.Querys;
 using ComputerStockApi.Querys.Processor;
@@ -11,6 +12,7 @@ using ComputerStockApi.Querys.Computers;
 using ComputerStockApi.Commands.Processor;
 using ComputerStockApi.Querys.State;
 using ComputerStockApi.Commands.State;
+using ComputerStockApi.Querys.Borrow;
 using ComputerStockApi.Querys.Type;
 using MediatRApi.Commands.User;
 using MediatRApi.Querys.User;
@@ -283,7 +285,27 @@ namespace ComputerStockApi.Controllers
 
             return Ok(response);
         }
-        
-        
+
+        [HttpGet("borrow")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetBorrow()
+        {
+            var request = new GetAllBorrowQuery();
+
+            var response = await mediator.Send(request);
+
+            return Ok(response);
+        }
+
+        [HttpPost("borrow")]
+        public async Task<IActionResult> AddBorrow([FromBody] BorrowComputerDto borrow)
+        {
+            var command = mapper.Map<CreateBorrowCommand>(borrow);
+
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
+
+
     }
 }
