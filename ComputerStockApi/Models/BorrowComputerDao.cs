@@ -12,14 +12,14 @@ namespace ComputerStockApi.Models
         public DateTime ToDate { get; set; }
 
         [ForeignKey("FK_BorrowComputer_Computer_Id")]
-        public int ComputersId { get; set; }
-        public ComputerDao Computers { get; set; }
+        public int ComputerId { get; set; }
+        public ComputerDao Computer { get; set; }
 
         [ForeignKey("FK_BorrowComputer_User_UserId")]
 
-        public int UsersId { get; set; }
+        public int UserId { get; set; }
 
-        public UserDao Users { get; set; }
+        public UserDao User { get; set; }
 
     }
 }

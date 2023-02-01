@@ -25,10 +25,10 @@ namespace ComputerStockApi.Querys.Borrow
         public async Task<IEnumerable<BorrowComputerDto>> Handle(GetAllBorrowQuery request, CancellationToken cancellationToken)
         {
             var daos = await _context.BorrowComputer
-                .Include(c => c.Computers).ThenInclude(c => c.Type)
-                .Include(c => c.Computers).ThenInclude(c => c.State)
-                .Include(c => c.Computers).ThenInclude(c => c.Processor)
-                .Include(c => c.Users)
+                .Include(c => c.Computer).ThenInclude(c => c.Type)
+                .Include(c => c.Computer).ThenInclude(c => c.State)
+                .Include(c => c.Computer).ThenInclude(c => c.Processor)
+                .Include(c => c.User)
                 .ToListAsync();
 
             var dto = mapper.Map<IEnumerable<BorrowComputerDto>>(daos);

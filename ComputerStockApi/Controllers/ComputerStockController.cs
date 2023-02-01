@@ -19,7 +19,7 @@ using MediatRApi.Querys.User;
 
 namespace ComputerStockApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/computer-stock")]
     [ApiController]
     public class ComputerStockController : ControllerBase
     {
