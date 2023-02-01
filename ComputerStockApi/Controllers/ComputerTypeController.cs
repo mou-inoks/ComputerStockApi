@@ -10,13 +10,13 @@ namespace ComputerStockApi.Controllers
 {
     [Route("api/computer-type")]
     [ApiController]
-    public class ComputerTypeController_ : ControllerBase
+    public class ComputerTypeController: ControllerBase
     {
         private readonly ComputerStockContext _context;
         private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public ComputerTypeController_(ComputerStockContext context, IMapper map, IMediator mediator)
+        public ComputerTypeController(ComputerStockContext context, IMapper map, IMediator mediator)
         {
             _context = context;
             mapper = map;
