@@ -303,6 +303,22 @@ namespace ComputerStockApi.Controllers
 
             var response = await mediator.Send(command);
 
+            var computer = new ComputerDto()
+            {
+                Id = borrow.Computer.Id,
+                State = new StateDto(){Id = 4, State = "Office"},
+                Ram = borrow.Computer.Ram,
+                Comment = borrow.Computer.Comment,
+                Processor = borrow.Computer.Processor,
+                Brand = borrow.Computer.Brand,
+                Type = borrow.Computer.Type,
+                Name = borrow.Computer.Name
+            };
+
+            var updateComputer = mapper.Map<UpdateComputerCommand>(computer);
+
+            await mediator.Send(updateComputer);
+
             return Ok(response);
         }
 
