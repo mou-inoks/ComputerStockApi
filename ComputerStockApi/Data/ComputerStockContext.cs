@@ -36,6 +36,7 @@ namespace ComputerStockApi.Data
                 new ComputerTypeDao() { Id = 2, Type = "Mini-Computer"},
                 new ComputerTypeDao() { Id = 3, Type = "Fix" }
                 );
+
         }
 
     }
