@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ComputerStockApi.Controllers
 {
+    [Route("api/borrow")]
+    [ApiController]
     public class BorrowComputerController : ControllerBase 
     {
         private readonly ComputerStockContext _context;

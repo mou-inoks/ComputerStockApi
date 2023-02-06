@@ -9,7 +9,7 @@ namespace ComputerStockApi.Models
         [Key]
         public int Id { get; set; }
         public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         [ForeignKey("FK_BorrowComputer_Computer_Id")]
         public int ComputerId { get; set; }
