@@ -12,6 +12,7 @@ namespace ComputerStockApi.Data
         public DbSet<ComputerTypeDao> ComputerType { get; set; }
         public DbSet<ProcessorDao> Processor { get; set; }
         public DbSet<StateDao> State{ get; set; }
+        public DbSet<PurposeDao> Purpose{ get; set; }
 
         public IConfiguration Configuration { get; set; }
         public ComputerStockContext(IConfiguration conf) : base()
@@ -20,7 +21,7 @@ namespace ComputerStockApi.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString"),
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("MacOsConnection"),
                     o =>
                     {
                         o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery).UseRelationalNulls();
@@ -34,9 +35,8 @@ namespace ComputerStockApi.Data
             modelBuilder.Entity<ComputerTypeDao>().HasData(
                 new ComputerTypeDao() { Id = 1, Type = "Laptop"},
                 new ComputerTypeDao() { Id = 2, Type = "Mini-Computer"},
-                new ComputerTypeDao() { Id = 3, Type = "Fix" }
+                new ComputerTypeDao() { Id = 3, Type = "PC" }
                 );
-
         }
 
     }

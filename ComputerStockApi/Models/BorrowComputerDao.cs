@@ -20,6 +20,14 @@ namespace ComputerStockApi.Models
         public int UserId { get; set; }
 
         public UserDao User { get; set; }
-
+        
+        [ForeignKey("Fk_BorrowComputer_Purpose_Id")]
+        
+        public int PurposeId { get; set; }
+        
+        public PurposeDao Purpose { get; set; }
+        
+        public string Comment { get; set; }
+        
     }
 }

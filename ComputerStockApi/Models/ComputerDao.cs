@@ -23,7 +23,6 @@ namespace ComputerStockApi.Daos
         [ForeignKey("FK_Computer_State_Id")]
         public int StateId { get; set; }
         public StateDao State { get; set; }
-        public string Comment { get; set; }
 
     }
 }
