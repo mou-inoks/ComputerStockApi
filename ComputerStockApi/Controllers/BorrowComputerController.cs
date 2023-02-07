@@ -13,13 +13,11 @@ namespace ComputerStockApi.Controllers
     [ApiController]
     public class BorrowComputerController : ControllerBase 
     {
-        private readonly ComputerStockContext _context;
         private readonly IMediator mediator;
         private readonly IMapper mapper;
 
-        public BorrowComputerController(ComputerStockContext context, IMediator mediator, IMapper map)
+        public BorrowComputerController(IMediator mediator, IMapper map)
         {
-            _context = context;
             this.mediator = mediator;
             mapper = map;
         }
