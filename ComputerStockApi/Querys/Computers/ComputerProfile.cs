@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ComputerStockApi.Commands.Borrow;
 using ComputerStockApi.Commands.Computers;
 using ComputerStockApi.Daos;
 using ComputerStockApi.Dtos;
@@ -11,6 +12,7 @@ namespace ComputerStockApi.Query
         public ComputerProfile()
         {
             CreateMap<ComputerDao, ComputerDto>();
+            CreateMap<ComputerDto, ComputerDao>();
             CreateMap<ComputerTypeDao, ComputerTypeDto>();
             CreateMap<ProcessorDao, ProcessorDto>();
             CreateMap<StateDao, StateDto>();
@@ -21,6 +23,9 @@ namespace ComputerStockApi.Query
             CreateMap<UpdateComputerCommand, ComputerDao>();
             CreateMap<UpdateComputerCommand, ComputerDto>();
             CreateMap<ComputerDto, UpdateComputerCommand>();
+            CreateMap<UpdateBorrowCommand, ComputerDao>();
+            CreateMap<ComputerDao, UpdateBorrowCommand>();
+
 
         }
     }

@@ -15,6 +15,10 @@ namespace ComputerStockApi.Querys.Borrow
             CreateMap<BorrowComputerDao, CreateBorrowCommand>();
             CreateMap<BorrowComputerDto, CreateBorrowCommand>();
             CreateMap<CreateBorrowCommand, BorrowComputerDto>();
+            CreateMap<BorrowComputerDto, UpdateBorrowCommand>();
+            CreateMap<UpdateBorrowCommand, BorrowComputerDto>();
+            CreateMap<BorrowComputerDao, UpdateBorrowCommand>();
+            CreateMap<UpdateBorrowCommand, BorrowComputerDao>();
         }
     }
 }
