@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ComputerStockApi.Commands.Type;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Models;
 
@@ -10,6 +11,11 @@ namespace ComputerStockApi.Querys.Type
         {
             CreateMap<ComputerTypeDao, ComputerTypeDto>();
             CreateMap<ComputerTypeDto, ComputerTypeDao>();
+
+            CreateMap<CreateTypeCommand, ComputerTypeDto>();
+            CreateMap<ComputerTypeDto, CreateTypeCommand>();
+
+
         }
     }
 }

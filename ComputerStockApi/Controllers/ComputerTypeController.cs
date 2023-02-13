@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ComputerStockApi.Commands.State;
+using ComputerStockApi.Commands.Type;
 using ComputerStockApi.Data;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Querys.Type;
@@ -37,12 +38,13 @@ namespace ComputerStockApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddType([FromBody] ComputerTypeDto typeDto)
         {
-            var command = mapper.Map<CreateStateCommand>(typeDto);
+            var command = mapper.Map<CreateTypeCommand>(typeDto);
 
-            var response = mediator.Send(command);
+            var response = await mediator.Send(command);
 
             return Ok(response);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteType(int id)
         {
