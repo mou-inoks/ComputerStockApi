@@ -13,7 +13,6 @@ namespace ComputerStockApi.Data
         public DbSet<ComputerTypeDao> ComputerType { get; set; }
         public DbSet<ProcessorDao> Processor { get; set; }
         public DbSet<StateDao> State{ get; set; }
-        public DbSet<PurposeDao> Purpose{ get; set; }
 
         public IConfiguration Configuration { get; set; }
         public ComputerStockContext(IConfiguration conf) : base()
@@ -38,15 +37,6 @@ namespace ComputerStockApi.Data
                 new ComputerTypeDao() { Id = 2, Type = "Mini-Computer"},
                 new ComputerTypeDao() { Id = 3, Type = "PC" }
                 );
-            modelBuilder.Entity<StateDao>().HasData(
-                new StateDao() { Id = 1, State = "New"},
-                new StateDao() { Id = 2, State = "Used"},
-                new StateDao() { Id = 3, State = "Broken" }
-            );
-            modelBuilder.Entity<PurposeDao>().HasData(
-                new PurposeDao() { Id = 1, Purpose = "Office"},
-                new PurposeDao() { Id = 2, Purpose = "Remote"}
-            );
         }
 
     }

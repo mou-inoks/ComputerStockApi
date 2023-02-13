@@ -7,9 +7,7 @@
         public DateTime? ToDate { get; set; }
         public ComputerDto Computer { get; set; }
         public UserDto User { get; set; }
-        
         public string Comment { get; set; }
         
-        public PurposeDto Purpose { get; set; }
     }
 }

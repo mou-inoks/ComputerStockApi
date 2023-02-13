@@ -30,7 +30,6 @@ namespace ComputerStockApi.Commands.Borrow
                 UserId = command.User.Id,
                 ComputerId = command.Computer.Id,
                 Comment = command.Comment,
-                PurposeId = command.Purpose.Id
             };
 
             await _context.BorrowComputer.AddAsync(dao);
