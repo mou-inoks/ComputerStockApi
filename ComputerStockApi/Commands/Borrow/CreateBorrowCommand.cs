@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ComputerStockApi.Commands.Computers;
 using ComputerStockApi.Data;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Models;
@@ -23,14 +24,33 @@ namespace ComputerStockApi.Commands.Borrow
 
         public async Task<Unit> Handle(CreateBorrowCommand command, CancellationToken cancellation)
         {
-            var dao = new BorrowComputerDao()
+            var dao = new BorrowComputerDao();
+            if (command.ToDate == null)
             {
-                FromDate = command.FromDate,
-                ToDate = command.ToDate,
-                UserId = command.User.Id,
-                ComputerId = command.Computer.Id,
-                Comment = command.Comment,
-            };
+                dao = new BorrowComputerDao()
+                {
+                    FromDate = command.FromDate,
+                    ToDate = command.ToDate,
+                    UserId = command.User.Id,
+                    ComputerId = command.Computer.Id,
+                    Comment = command.Comment,
+                };
+
+                var computer = new ComputerDto()
+                {
+                    Id = command.Computer.Id,
+                    Name = command.Computer.Name,
+                    Type = command.Computer.Type,
+                    Brand = command.Computer.Brand,
+                    Processor = command.Computer.Processor,
+                    Ram = command.Computer.Ram,
+                    State = new StateDto(){ Id = }
+
+                }
+
+                var cd = mapper.Map<UpdateComputerCommand>(computer);
+            }
+            
 
             await _context.BorrowComputer.AddAsync(dao);
 

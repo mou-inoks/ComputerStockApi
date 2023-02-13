@@ -4,18 +4,9 @@ using MediatR;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Query;
 using AutoMapper;
-using ComputerStockApi.Commands.Borrow;
 using ComputerStockApi.Commands.Computers;
-using ComputerStockApi.Querys;
-using ComputerStockApi.Querys.Processor;
 using ComputerStockApi.Querys.Computers;
-using ComputerStockApi.Commands.Processor;
-using ComputerStockApi.Querys.State;
-using ComputerStockApi.Commands.State;
-using ComputerStockApi.Querys.Borrow;
-using ComputerStockApi.Querys.Type;
-using MediatRApi.Commands.User;
-using MediatRApi.Querys.User;
+
 
 namespace ComputerStockApi.Controllers
 {
@@ -23,13 +14,11 @@ namespace ComputerStockApi.Controllers
     [ApiController]
     public class ComputerStockController : ControllerBase
     {
-        private readonly ComputerStockContext _context;
         private readonly IMediator mediator;
         private readonly IMapper mapper;
 
-        public ComputerStockController(ComputerStockContext context, IMediator mediator, IMapper map )
+        public ComputerStockController(IMediator mediator, IMapper map )
         {
-            _context = context;
             this.mediator = mediator;
             mapper = map;
         }

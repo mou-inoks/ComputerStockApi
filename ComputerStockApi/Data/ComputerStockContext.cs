@@ -38,6 +38,5 @@ namespace ComputerStockApi.Data
                 new ComputerTypeDao() { Id = 3, Type = "PC" }
                 );
         }
-
     }
 }
