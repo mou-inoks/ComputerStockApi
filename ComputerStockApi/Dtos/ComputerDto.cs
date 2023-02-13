@@ -11,6 +11,5 @@ namespace ComputerStockApi.Dtos
         public ProcessorDto Processor { get; set; }
         public int Ram { get; set; }
         public StateDto State { get; set; }
-        public string Comment { get; set; }
     }
 }

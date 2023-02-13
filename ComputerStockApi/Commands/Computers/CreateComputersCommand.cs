@@ -30,7 +30,6 @@ namespace ComputerStockApi.Commands.Computers
                 ProcessorId = command.Processor.Id,
                 TypeId = command.Type.Id,
                 Brand = command.Brand,
-                Comment = command.Comment,
                 Ram = command.Ram,
             };
 

@@ -28,6 +28,7 @@ namespace ComputerStockApi.Querys.Borrow
                 .Include(c => c.Computer).ThenInclude(c => c.Type)
                 .Include(c => c.Computer).ThenInclude(c => c.State)
                 .Include(c => c.Computer).ThenInclude(c => c.Processor)
+                .Include(c => c.Purpose)
                 .Include(c => c.User)
                 .ToListAsync();
 

@@ -4,6 +4,7 @@ using ComputerStockApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComputerStockApi.Migrations
 {
     [DbContext(typeof(ComputerStockContext))]
-    partial class ComputerStockContextModelSnapshot : ModelSnapshot
+    [Migration("20230207215659_EditPurposetable")]
+    partial class EditPurposetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,18 +176,6 @@ namespace ComputerStockApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Purpose");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Purpose = "Office"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Purpose = "Remote"
-                        });
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.StateDao", b =>
@@ -202,23 +193,6 @@ namespace ComputerStockApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("State");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            State = "New"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            State = "Used"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            State = "Broken"
-                        });
                 });
 
             modelBuilder.Entity("ComputerStockApi.Models.UserDao", b =>
