@@ -4,6 +4,8 @@ using ComputerStockApi.Data;
 using ComputerStockApi.Dtos;
 using ComputerStockApi.Models;
 using MediatR;
+using System;
+using ComputerStockApi.Enum;
 
 namespace ComputerStockApi.Commands.Borrow
 {
@@ -15,11 +17,13 @@ namespace ComputerStockApi.Commands.Borrow
     {
         private readonly IMapper mapper;
         private readonly ComputerStockContext _context;
+        private readonly IMediator mediator;
 
-        public CreateBorrowCommandHandler(IMapper map, IConfiguration conf)
+        public CreateBorrowCommandHandler(IMapper map, IConfiguration conf, IMediator med)
         {
             _context = new ComputerStockContext(conf);
             mapper = map;
+            mediator = med; 
         }
 
         public async Task<Unit> Handle(CreateBorrowCommand command, CancellationToken cancellation)
@@ -44,11 +48,12 @@ namespace ComputerStockApi.Commands.Borrow
                     Brand = command.Computer.Brand,
                     Processor = command.Computer.Processor,
                     Ram = command.Computer.Ram,
-                    State = new StateDto(){ Id = }
-
-                }
+                    State = new StateDto(){ Id = (int)ComputerStateEnum.Office, State = "Office"},
+                };
 
                 var cd = mapper.Map<UpdateComputerCommand>(computer);
+
+                await mediator.Send(cd);
             }
             
 

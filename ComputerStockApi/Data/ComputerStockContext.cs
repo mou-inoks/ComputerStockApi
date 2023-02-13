@@ -37,6 +37,13 @@ namespace ComputerStockApi.Data
                 new ComputerTypeDao() { Id = 2, Type = "Mini-Computer"},
                 new ComputerTypeDao() { Id = 3, Type = "PC" }
                 );
+
+            modelBuilder.Entity<StateDao>().HasData(
+                new StateDao() { Id = 1, State = "In Stock" },
+                new StateDao() { Id = 2, State = "Remote" },
+                new StateDao() { Id = 3, State = "Office" },
+                new StateDao() { Id = 4, State = "Other" }
+            );
         }
     }
 }
