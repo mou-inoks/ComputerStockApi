@@ -2,10 +2,9 @@
 using ComputerStockApi.Commands.Computers;
 using ComputerStockApi.Data;
 using ComputerStockApi.Dtos;
+using ComputerStockApi.Enum;
 using ComputerStockApi.Models;
 using MediatR;
-using System;
-using ComputerStockApi.Enum;
 
 namespace ComputerStockApi.Commands.Borrow
 {
@@ -28,34 +27,33 @@ namespace ComputerStockApi.Commands.Borrow
 
         public async Task<Unit> Handle(CreateBorrowCommand command, CancellationToken cancellation)
         {
-            var dao = new BorrowComputerDao();
-            if (command.ToDate == null)
+
+            var dao = new BorrowComputerDao()
             {
-                dao = new BorrowComputerDao()
-                {
-                    FromDate = command.FromDate,
-                    ToDate = command.ToDate,
-                    UserId = command.User.Id,
-                    ComputerId = command.Computer.Id,
-                    Comment = command.Comment,
-                };
+                FromDate = command.FromDate,
+                ToDate = command.ToDate,
+                UserId = command.User.Id,
+                ComputerId = command.Computer.Id,
+                Comment = command.Comment,
+            };
 
-                var computer = new ComputerDto()
-                {
-                    Id = command.Computer.Id,
-                    Name = command.Computer.Name,
-                    Type = command.Computer.Type,
-                    Brand = command.Computer.Brand,
-                    Processor = command.Computer.Processor,
-                    Ram = command.Computer.Ram,
-                    State = new StateDto(){ Id = (int)ComputerStateEnum.Office, State = "Office"},
-                };
+            var computer = new ComputerDto()
+            {
+                Id = command.Computer.Id,
+                Name = command.Computer.Name,
+                Type = command.Computer.Type,
+                Brand = command.Computer.Brand,
+                Processor = command.Computer.Processor,
+                Ram = command.Computer.Ram,
+                State = new StateDto() { Id = (int)ComputerStateEnum.Office, State = "Office" },
+            };
 
-                var cd = mapper.Map<UpdateComputerCommand>(computer);
 
-                await mediator.Send(cd);
-            }
-            
+            // update the computer for the office status 
+            var cd = mapper.Map<UpdateComputerCommand>(computer);
+
+            await mediator.Send(cd);
+
 
             await _context.BorrowComputer.AddAsync(dao);
 

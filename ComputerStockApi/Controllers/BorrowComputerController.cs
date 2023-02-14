@@ -52,6 +52,16 @@ namespace ComputerStockApi.Controllers
             return Ok(response);
         }
 
+        [HttpPost("return")]
+        public async Task<ActionResult<BorrowComputerDto>> ReturnComputer([FromBody] BorrowComputerDto borrowComputer)
+        {
+            var command = mapper.Map<UpdateBorrowCommand>(borrowComputer);
+
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<IEnumerable<BorrowComputerDto>>> DeleteComputer(int id)
         {
